@@ -1,0 +1,15 @@
+{
+  "name": "sphere-platform",
+  "description": "Sphere backend platform",
+  "author": "Romano Schoonheim <romano@atmosphere.sh>",
+  "license": "MIT",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.2",
+    "typescript": "^5.1.3"
+  }
+}
