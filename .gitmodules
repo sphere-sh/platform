@@ -1,0 +1,3 @@
+[submodule "data-ingestion"]
+	path = data-ingestion
+	url = git@github.com:sphere-sh/data-ingestion.git
