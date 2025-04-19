@@ -4,3 +4,6 @@
 [submodule "data-storage"]
     path = data-storage
     url = git@github.com:sphere-sh/data-storage.git
+[submodule "data-management"]
+	path = data-management
+	url = git@github.com:sphere-sh/data-management.git
