@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
     paths:
       - 'cmd/universe/**'
+      - ".github/workflows/build-universe-binary.yml"
 
 jobs:
 
