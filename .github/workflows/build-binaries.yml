@@ -133,13 +133,17 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          pattern: 'sphere-binaries.tar.gz'
+          pattern: '*-binaries'
           merge-multiple: true
+          path: dist/
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           body: "New release of Sphere binaries"
           tag_name: "latest"
-          files: 'sphere-binaries.tar.gz'
+          files: |
+                dist/sphere-ingestion
+                dist/sphere-storage
+                dist/sphere-management
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
