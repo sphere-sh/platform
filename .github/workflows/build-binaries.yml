@@ -8,7 +8,8 @@ on:
       - "build-binaries.yml"
 
 jobs:
-
+  # Build each component in parallel
+  #
   build_binaries:
     runs-on: ubuntu-latest
     strategy:
