@@ -47,5 +47,5 @@ jobs:
           file: .docker/Dockerfile
           push: true
           tags: hyperplanenl/platform:${{ env.LATEST_TAG }}
-          build-args:
-            SPHERE_VERSION: ${{env.LATEST_TAG}}
+          build-args: |
+            SPHERE_VERSION=${{env.LATEST_TAG}}
