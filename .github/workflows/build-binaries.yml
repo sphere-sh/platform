@@ -121,7 +121,6 @@ jobs:
           path: dist/
       - name: Create archive of binaries
         run: |
-          mkdir -p dist
           tar -czf dist/sphere-binaries.tar.gz -C dist .
       - name: Upload archive as artifact
         uses: actions/upload-artifact@v4
