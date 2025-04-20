@@ -135,12 +135,11 @@ jobs:
         with:
           pattern: 'sphere-binaries.tar.gz'
           merge-multiple: true
-          path: dist/
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           body: "New release of Sphere binaries"
           tag_name: "latest"
-          files: sphere-binaries.tar.gz
+          files: 'sphere-binaries.tar.gz'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
