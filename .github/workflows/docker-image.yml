@@ -22,9 +22,9 @@ jobs:
       - name: Download binaries from latest release
         run: |
             mkdir -p binaries
-            curl -L -o https://github.com/sphere-sh/platform/releases/download/${ env.LATEST_TAG }/sphere-ingestion binaries/sphere-ingestion
-            curl -L -o https://github.com/sphere-sh/platform/releases/download/${ env.LATEST_TAG }/sphere-storage binaries/sphere-ingestion
-            curl -L -o https://github.com/sphere-sh/platform/releases/download/${ env.LATEST_TAG }/sphere-management binaries/sphere-ingestion
+            curl -L -o https://github.com/sphere-sh/platform/releases/download/${{ env.LATEST_TAG }}/sphere-ingestion binaries/sphere-ingestion
+            curl -L -o https://github.com/sphere-sh/platform/releases/download/${{ env.LATEST_TAG }}/sphere-storage binaries/sphere-ingestion
+            curl -L -o https://github.com/sphere-sh/platform/releases/download/${{ env.LATEST_TAG }}/sphere-management binaries/sphere-ingestion
             
             # List the files in the current directory
             echo "Downloaded binaries:"
