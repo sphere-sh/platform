@@ -104,7 +104,7 @@ jobs:
 
   # Create a release for the binaries
   #
-  release_binaries:
+  archive_binaries:
     runs-on: ubuntu-latest
     needs:
       - build_universe_binaries
@@ -119,8 +119,13 @@ jobs:
           pattern: '*-binaries'
           merge-multiple: true
           path: dist/
-      - name: List all artifacts
-        run: ls -la dist/
-
-
-
+      - name: Create archive of binaries
+        run: |
+          mkdir -p dist
+          tar -czf dist/sphere-binaries.tar.gz -C dist .
+      - name: Upload archive as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sphere-binaries.tar.gz
+          path: |
+            dist/sphere-binaries.tar.gz
