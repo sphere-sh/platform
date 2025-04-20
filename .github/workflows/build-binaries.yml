@@ -100,8 +100,6 @@ jobs:
           path: |
             data-management/cmd/server/sphere-management
 
-  
-
   # Create a release for the binaries
   #
   archive_binaries:
@@ -125,3 +123,24 @@ jobs:
           name: sphere-binaries.tar.gz
           path: |
             dist/*
+
+  # Create a release with the archive
+  #
+  create_release:
+    runs-on: ubuntu-latest
+    needs: archive_binaries
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: 'sphere-binaries.tar.gz'
+          merge-multiple: true
+          path: dist/
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: "New release of Sphere binaries"
+          tag_name: "latest"
+          files: dist/sphere-binaries.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
