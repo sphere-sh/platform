@@ -129,7 +129,6 @@ jobs:
         run: |
             # Get the latest tag
             latest_tag=${{ env.latest_tag }}
-            # When tag is not set or `latest`, set it to 0.0.0
             if [[ "$latest_tag" == "latest" || -z "$latest_tag" ]]; then
                 latest_tag="0.0.0"
             fi
@@ -138,6 +137,9 @@ jobs:
             new_patch=$((patch + 1))
             new_tag="v$major.$minor.$new_patch"
             echo "new_tag=$new_tag" >> $GITHUB_ENV
+      - name: print tag
+        run: |
+          echo "New tag: ${{ env.new_tag }}"
       - name: Create release
         if: github.ref_type == 'tag'
         uses: softprops/action-gh-release@v2
