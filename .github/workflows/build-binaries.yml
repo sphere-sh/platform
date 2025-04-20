@@ -121,10 +121,10 @@ jobs:
           path: dist/
       - name: Create archive of binaries
         run: |
-          tar -czf dist/sphere-binaries.tar.gz -C dist .
+          tar -czf sphere-binaries.tar.gz -C dist .
       - name: Upload archive as artifact
         uses: actions/upload-artifact@v4
         with:
           name: sphere-binaries.tar.gz
           path: |
-            dist/sphere-binaries.tar.gz
+            sphere-binaries.tar.gz
