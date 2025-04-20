@@ -113,3 +113,14 @@ jobs:
       - build_management_binaries
     steps:
       - uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: '*-binaries'
+          merge-multiple: true
+          path: dist/
+      - name: List all artifacts
+        run: ls -la dist/
+
+
+
