@@ -1,0 +1,19 @@
+#!/sbin/openrc-run
+
+name="sphere-universe"
+description="Sphere Universe Service"
+command="/bin/universe"
+command_user="sphere-universe:sphere-universe"
+pidfile="/run/${name}.pid"
+output_log="/var/log/${name}.log"
+error_log="/var/log/${name}.log"
+
+depend() {
+    need net
+    after firewall
+}
+
+start_pre() {
+    checkpath -f -o "${command_user}" -m 0644 "${output_log}" "${error_log}"
+    checkpath -d -o "${command_user}" -m 0755 "/run"
+}

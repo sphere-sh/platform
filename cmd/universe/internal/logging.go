@@ -8,21 +8,19 @@ import (
 )
 
 // SetupLogging - setup the logging.
-func SetupLogging() {
-	// Define the log directory and file
-	logDir := "./logs"
-	logFile := "app.log"
+func SetupLogging(rootDirectory string) {
 
-	// Prepand the current date and time to the log file name
-	logFile = time.Now().Format("2006-01-02_15-04-05") + "_" + logFile
+	logDirectory := filepath.Join(rootDirectory, "logs")
+
+	logFile := time.Now().Format("2006-01-02_15-04-05") + "_log.json"
 
 	// Ensure the log directory exists
-	if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
+	if err := os.MkdirAll(logDirectory, os.ModePerm); err != nil {
 		panic("Failed to create log directory: " + err.Error())
 	}
 
 	// Open the log file
-	filePath := filepath.Join(logDir, logFile)
+	filePath := filepath.Join(logDirectory, logFile)
 	logFileHandle, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		panic("Failed to open log file: " + err.Error())
