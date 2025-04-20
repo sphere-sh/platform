@@ -117,6 +117,31 @@ jobs:
           pattern: '*-binaries'
           merge-multiple: true
           path: dist/
+      - name: Determine semver update type (major, minor, patch)
+        id: determine_update_type
+        run: |
+          # Get git commits until last tag
+          git fetch --tags
+          commits=$(git rev-list --count HEAD ^$(git describe --tags `git rev-list --tags --max-count=1`))
+          
+          # Search commits for keywords [MAJOR], [MINOR], [PATCH]
+          major=$(git log --grep="\[MAJOR\]" --oneline | wc -l)
+          if [[ $major -gt 0 ]]; then
+              echo "MAJOR"
+              echo "update_type=MAJOR" >> $GITHUB_ENV
+              exit 0
+          fi
+          
+          minor=$(git log --grep="\[MINOR\]" --oneline | wc -l)
+          if [[ $minor -gt 0 ]]; then
+              echo "MINOR"
+              echo "update_type=MINOR" >> $GITHUB_ENV
+              exit 0
+          fi
+          
+          # Default to patch if no keywords found
+          echo "PATCH"
+          echo "update_type=PATCH" >> $GITHUB_ENV
       - name: Get latest tag
         id: get_latest_tag
         run: |
@@ -127,14 +152,35 @@ jobs:
         id: generate_new_tag
         run: |
             # Get the latest tag
+            #
             latest_tag=${{ env.latest_tag }}
             if [[ "$latest_tag" == "latest" || -z "$latest_tag" ]]; then
                 latest_tag="0.0.0"
             fi
-            # Increment the patch version
-            IFS='.' read -r major minor patch <<< "${latest_tag#v}"
-            new_patch=$((patch + 1))
-            new_tag="v$major.$minor.$new_patch"
+          
+            # Get the update type
+            #
+            update_type=${{ env.update_type }}
+          
+            # Increment the version based on the update type
+            #
+            if [[ "$update_type" == "MAJOR" ]]; then
+                IFS='.' read -r major minor patch <<< "${latest_tag#v}"
+                new_major=$((major + 1))
+                new_tag="v$new_major.0.0"
+            elif [[ "$update_type" == "MINOR" ]]; then
+                IFS='.' read -r major minor patch <<< "${latest_tag#v}"
+                new_minor=$((minor + 1))
+                new_tag="v$major.$new_minor.0"
+            elif [[ "$update_type" == "PATCH" ]]; then
+                IFS='.' read -r major minor patch <<< "${latest_tag#v}"
+                new_patch=$((patch + 1))
+                new_tag="v$major.$minor.$new_patch"
+            else
+                echo "Unknown update type: $update_type"
+                exit 1
+            fi
+          
             echo "new_tag=$new_tag" >> $GITHUB_ENV
       - name: print tag
         run: |
