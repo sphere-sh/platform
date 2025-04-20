@@ -8,7 +8,6 @@ on:
       - 'data-ingestion/**'
       - 'data-storage/**'
       - 'data-management/**'
-      - ".github/workflows/build-binaries.yml"
 
 jobs:
   build_universe_binaries:
