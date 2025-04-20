@@ -9,4 +9,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.24
+      - name: Install dependencies
+        working-directory: ./cmd/universe
+        run: go mod download
+      - name: Build Universe Binary
+        working-directory: ./cmd/universe
+        run: go build -o sphere-universe ./main.go
