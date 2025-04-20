@@ -52,7 +52,7 @@ jobs:
         with:
           name: ingestion-binaries
           path: |
-            cmd/ingestion/server/sphere-ingestion
+            data-ingestion/cmd/server/sphere-ingestion
 
   
 
