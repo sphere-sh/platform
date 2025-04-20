@@ -195,5 +195,6 @@ jobs:
                 dist/sphere-ingestion
                 dist/sphere-storage
                 dist/sphere-management
+                dist/sphere-universe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

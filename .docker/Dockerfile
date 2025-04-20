@@ -1,5 +1,38 @@
 FROM alpine:3.2 AS runner
 
+ARG SPHERE_VERSION=0.1.0
+
+# ----------------------------------------------------------------
+#
+# Download binaries from the Sphere Universe repository.
+#
+# -----------------------------------------------------------------
+
+# Download from https://github.com/sphere-sh/platform/releases/download/v0.1.3/sphere-ingestion
+RUN apk add --no-cache curl
+
+RUN mkdir -p /var/sphere/universe
+RUN mkdir -p /var/sphere/ingestion
+RUN mkdir -p /var/sphere/management
+RUN mkdir -p /var/sphere/storage
+
+# Download Sphere Universe
+#
+RUN curl https://github.com/sphere-sh/platform/releases/download/v${SPHERE_VERSION}/sphere-universe -o /var/sphere/universe/sphere-universe
+
+# Download Sphere Ingestion
+#
+RUN curl https://github.com/sphere-sh/platform/releases/download/v${SPHERE_VERSION}/sphere-ingestion -o /var/sphere/ingestion/sphere-ingestion
+
+# Download Sphere Management
+#
+RUN curl https://github.com/sphere-sh/platform/releases/download/v${SPHERE_VERSION}/sphere-management -o /var/sphere/management/sphere-management
+
+# Download Sphere Storage
+#
+RUN curl https://github.com/sphere-sh/platform/releases/download/v${SPHERE_VERSION}/sphere-storage -o /var/sphere/storage/sphere-storage
+
+
 # ----------------------------------------------------------------
 #
 # Installation and configuration of OpenRC and dependencies.
