@@ -141,7 +141,7 @@ jobs:
         run: |
           echo "New tag: ${{ env.new_tag }}"
       - name: Create release
-        if: github.ref_type == 'tag'
+        id: create_release
         uses: softprops/action-gh-release@v2
         with:
           body: "New release of Sphere binaries"
