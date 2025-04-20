@@ -5,6 +5,9 @@ on:
     branches: [ "master" ]
     paths:
       - 'cmd/universe/**'
+      - 'data-ingestion/**'
+      - 'data-storage/**'
+      - 'data-management/**'
       - ".github/workflows/build-binaries.yml"
 
 jobs:
