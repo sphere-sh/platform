@@ -111,6 +111,7 @@ jobs:
       - build_storage_binaries
       - build_management_binaries
     steps:
+      - uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -128,9 +129,9 @@ jobs:
         run: |
             # Get the latest tag
             latest_tag=${{ env.latest_tag }}
-            # When tag is not set, set it to 0.0.0
-            if [ -z "$latest_tag" ]; then
-                latest_tag="v0.0.0"
+            # When tag is not set or `latest`, set it to 0.0.0
+            if [[ "$latest_tag" == "latest" || -z "$latest_tag" ]]; then
+                latest_tag="0.0.0"
             fi
             # Increment the patch version
             IFS='.' read -r major minor patch <<< "${latest_tag#v}"
