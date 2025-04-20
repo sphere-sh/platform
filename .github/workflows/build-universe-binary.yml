@@ -22,4 +22,4 @@ jobs:
         run: go mod download
       - name: Build Universe Binary
         working-directory: cmd/universe
-        run: go build -o sphere-universe main.go
+        run: go build -o sphere-universe ./main.go
