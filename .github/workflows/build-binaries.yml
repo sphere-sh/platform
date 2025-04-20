@@ -141,6 +141,6 @@ jobs:
         with:
           body: "New release of Sphere binaries"
           tag_name: "latest"
-          files: dist/sphere-binaries.tar.gz
+          files: sphere-binaries.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
