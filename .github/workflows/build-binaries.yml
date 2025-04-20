@@ -120,10 +120,10 @@ jobs:
           merge-multiple: true
           path: dist/
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           body: "New release of Sphere binaries"
-          tag_name: "latest"
+          make_latest: true
           files: |
                 dist/sphere-ingestion
                 dist/sphere-storage
