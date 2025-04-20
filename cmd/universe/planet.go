@@ -1,4 +1,4 @@
 package sphere_platform_universe
 
-// Planet - a struct representing a planet in the universe.
+// Planet -
 type Planet struct{}
