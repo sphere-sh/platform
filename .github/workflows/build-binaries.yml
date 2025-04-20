@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
     paths:
       - 'cmd/universe/**'
-      - "build-binaries.yml"
+      - ".github/workflows/build-binaries.yml"
 
 jobs:
   # Build each component in parallel
